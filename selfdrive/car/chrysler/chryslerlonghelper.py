@@ -5,8 +5,8 @@ from numpy import interp
 SET_SPEED_MIN = 5 * CV.MPH_TO_MS
 SET_SPEED_MAX = 120 * CV.MPH_TO_MS
 LONG_PRESS_TIME = 50  # 500msec
-SHORT_PRESS_STEP = 1
-LONG_PRESS_STEP = 5
+SHORT_PRESS_STEP = 5
+LONG_PRESS_STEP = 1
 # Accel Hard limits
 ACCEL_HYST_GAP = 0.0  # don't change accel command for small oscillations within this value
 ACCEL_MAX = 2.  # m/s2
