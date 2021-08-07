@@ -26,14 +26,14 @@ class CarInterface(CarInterfaceBase):
     ret.openpilotLongitudinalControl = Params().get_bool('ChryslerMangoLong')
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
-    ret.longitudinalTuning.kpBP = [0., .3, 10., 35.]
-    ret.longitudinalTuning.kpV = [0.6, 0.6, .6, .6]
-    ret.longitudinalTuning.kiBP = [0., .3, 15., 35.]
-    ret.longitudinalTuning.kiV = [0.006, .005, .005, .0045]
-    ret.longitudinalTuning.deadzoneBP = [0., .5]
-    ret.longitudinalTuning.deadzoneV = [0.00, 0.00]
+    ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
+    ret.longitudinalTuning.kpV = [0.6, 0.6, .65, .45, .58] #Higher to keep speed more aggressive
+    ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
+    ret.longitudinalTuning.kiV = [0.006, .0045, .0045, .0045 .0045] #error correction, lower if goes over target
+    ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
+    ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.5, 0.5] #Deadzone to ignore error
     ret.gasMaxBP = [0., 1., 1.1, 15., 40.]
-    ret.gasMaxV = [2., 2., 2., 2., 2.]
+    ret.gasMaxV = [2., 2., 2., 2., 2.] #Maximum acceleration
     ret.brakeMaxBP = [0., 5., 5.1]
     ret.brakeMaxV = [3.8, 3.8, 3.8]  # safety limits to stop unintended deceleration
     ret.longitudinalTuning.kfBP = [0., 5., 10., 20., 30.]
@@ -50,17 +50,17 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kfBP = [0.]
       ret.lateralTuning.pid.kfV = [0.00005]   # full torque for 10 deg at 80mph means 0.00007818594
     else:
-      ret.lateralTuning.pid.kpBP = [0., 10., 30.]
-      ret.lateralTuning.pid.kpV = [0.04, 0.06, 0.07]
+      ret.lateralTuning.pid.kpBP = [0., 10., 20., 30., 35]
+      ret.lateralTuning.pid.kpV = [0.03, 0.06, 0.65, 0.072, 0.073] #Lower for less effective steering
 
       ret.lateralTuning.pid.kiBP = [0., 30.]
-      ret.lateralTuning.pid.kiV = [0.03, 0.03]
+      ret.lateralTuning.pid.kiV = [0.03, 0.03] #Lower for less slop, higher for more slop.
 
       ret.lateralTuning.pid.kdBP = [0.]
       ret.lateralTuning.pid.kdV = [100.]
 
-      ret.lateralTuning.pid.kfBP = [0., 15., 30.]
-      ret.lateralTuning.pid.kfV = [0.000015, 0.000025, 0.000030]   # full torque for 10 deg at 80mph means 0.00007818594
+      ret.lateralTuning.pid.kfBP = [0., 15., 30., 35]  #Steering torque
+      ret.lateralTuning.pid.kfV = [0.000009, 0.000016, 0.000030, 0.000032]   # full torque for 10 deg at 80mph means 0.00007818594
 
     ret.steerActuatorDelay = 0.01
     ret.steerRateCost = 0.6
