@@ -137,13 +137,13 @@ def accel_rate_limit(accel_lim, prev_accel_lim, stopped):
   return accel_lim
 
 
-def cluster_chime(chime_val, enabled, enabled_prev, chime_timer, gap_timer):
+def cluster_chime(chime_val, enabled, enabled_prev, chime_timer, gap_timer, mute):
 
   if not enabled_prev and enabled:
     chime_val = 4
     chime_timer = CHIME_TIME
     gap_timer = 0
-  elif enabled_prev and not enabled:
+  elif enabled_prev and not enabled and not mute:
     chime_val = 7
     chime_timer = CHIME_TIME
     gap_timer = CHIME_GAP_TIME

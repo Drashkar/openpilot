@@ -280,7 +280,8 @@ class CarController():
     else:
       self.accel_active = False
 
-    self.chime, self.chime_timer, self.gap_timer = cluster_chime(self.chime, enabled, self.enabled_prev, self.chime_timer, self.gap_timer)
+    self.chime_mute = True if (CS.out.brakePressed or CS.acc_cancel_button) else False
+    self.chime, self.chime_timer, self.gap_timer = cluster_chime(self.chime, enabled, self.enabled_prev, self.chime_timer, self.gap_timer, self.chime_mute)
     self.enabled_prev = enabled
       # Send ACC msgs on can
     ####################################################################################################################
