@@ -50,10 +50,10 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kfBP = [0.]
       ret.lateralTuning.pid.kfV = [0.00005]   # full torque for 10 deg at 80mph means 0.00007818594
     else:
-      ret.lateralTuning.pid.kpBP = [0., 10., 30.]
-      ret.lateralTuning.pid.kpV = [0.04, 0.05, 0.06]
-      #ret.lateralTuning.pid.kpBP = [0., 10., 20., 30., 35]
-      #ret.lateralTuning.pid.kpV = [0.03, 0.06, 0.065, 0.072, 0.073] #Lower for less effective steering
+      #ret.lateralTuning.pid.kpBP = [0., 10., 30.]
+      #ret.lateralTuning.pid.kpV = [0.04, 0.05, 0.06]
+      ret.lateralTuning.pid.kpBP = [0., 10., 20., 30., 35]
+      ret.lateralTuning.pid.kpV = [0.03, 0.06, 0.065, 0.072, 0.073] #Lower for less effective steering
 
       ret.lateralTuning.pid.kiBP = [0., 30.]
       ret.lateralTuning.pid.kiV = [0.03, 0.03] #Lower for less slop, higher for more slop.
