@@ -29,7 +29,7 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
     ret.longitudinalTuning.kpV = [0.6, 0.40, .40, .45, .58] #Higher to keep speed more aggressive
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
-    ret.longitudinalTuning.kiV = [0.006, .0045, .0045, .0045, .0045] #error correction, lower if goes over target
+    ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
     ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
     ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.5, 0.5] #Deadzone to ignore error
     ret.gasMaxBP = [0., 1., 1.1, 15., 40.]
