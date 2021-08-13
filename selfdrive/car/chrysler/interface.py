@@ -56,7 +56,7 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kpV = [0.04, 0.05, 0.058, 0.068, 0.073] #Lower for less effective steering
 
       ret.lateralTuning.pid.kiBP = [0., 30.]
-      ret.lateralTuning.pid.kiV = [0.03, 0.03] #Lower for less slop, higher for more slop.
+      ret.lateralTuning.pid.kiV = [0.025, 0.025] #Lower for less slop, higher for more slop.
 
       ret.lateralTuning.pid.kdBP = [0.]
       ret.lateralTuning.pid.kdV = [100.]
