@@ -27,7 +27,7 @@ class CarInterface(CarInterfaceBase):
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
     ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
-    ret.longitudinalTuning.kpV = [0.50, 0.45, .45, .50, .58] #Higher to keep speed more aggressive
+    ret.longitudinalTuning.kpV = [0.50, 0.45, .48, .54, .58] #Higher to keep speed more aggressive
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
     ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
     ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
@@ -56,15 +56,15 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kpV = [0.04, 0.05, 0.058, 0.068, 0.073] #Lower for less effective steering
 
       ret.lateralTuning.pid.kiBP = [0., 30.]
-      ret.lateralTuning.pid.kiV = [0.025, 0.025] #Lower for less slop, higher for more slop.
+      ret.lateralTuning.pid.kiV = [0.025, 0.026] #Lower for less slop, higher for more slop.
 
       ret.lateralTuning.pid.kdBP = [0.]
       ret.lateralTuning.pid.kdV = [100.]
 
-      ret.lateralTuning.pid.kfBP = [0., 15., 30.]
-      ret.lateralTuning.pid.kfV = [0.000015, 0.000022, 0.000028]   # full torque for 10 deg at 80mph means 0.00007818594
-      #ret.lateralTuning.pid.kfBP = [0., 15., 30., 35]  #Steering torque
-      #ret.lateralTuning.pid.kfV = [0.000009, 0.000016, 0.000030, 0.000032]   # full torque for 10 deg at 80mph means 0.00007818594
+     # ret.lateralTuning.pid.kfBP = [0., 15., 30.]
+     # ret.lateralTuning.pid.kfV = [0.000015, 0.000022, 0.000028]   # full torque for 10 deg at 80mph means 0.00007818594
+      ret.lateralTuning.pid.kfBP = [0., 15., 30., 35]  #Steering torque
+      ret.lateralTuning.pid.kfV = [0.000009, 0.000020, 0.000028, 0.000032]   # full torque for 10 deg at 80mph means 0.00007818594
 
     ret.steerActuatorDelay = 0.01
     ret.steerRateCost = 0.65
