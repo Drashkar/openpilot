@@ -31,7 +31,7 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
     ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
     ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
-    ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.5, 0.5] #Deadzone to ignore error
+    ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.3, 0.3] #Deadzone to ignore error
     ret.gasMaxBP = [0., 1., 1.1, 15., 40.]
     ret.gasMaxV = [2., 2., 2., 2., 2.] #Maximum acceleration
     ret.brakeMaxBP = [0., 5., 5.1]
