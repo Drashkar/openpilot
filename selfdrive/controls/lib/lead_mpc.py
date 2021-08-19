@@ -84,7 +84,7 @@ class LeadMpc():
       a_lead = 0.0
       self.a_lead_tau = _LEAD_ACCEL_TAU
 
-    TR = 1.5
+    TR = 1.3
     # Calculate mpc
     t = sec_since_boot()
     self.n_its = self.libmpc.run_mpc(self.cur_state, self.mpc_solution, self.a_lead_tau, a_lead, TR)
