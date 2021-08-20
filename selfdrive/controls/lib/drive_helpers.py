@@ -22,6 +22,9 @@ MAX_CURVATURE_RATE_SPEEDS = [0, 35]
 sadBP = [0., 5., 10., 22., 25., 40.]
 sadV = [.0, .05, .12, .28, .30, .45]
 
+#sadBP = [0., 5., 10., 22., 25., 40.]
+#sadV = [.0, .05, .1, .2, .2, .45]
+
 class MPC_COST_LAT:
   PATH = 1.0
   HEADING = 1.0
