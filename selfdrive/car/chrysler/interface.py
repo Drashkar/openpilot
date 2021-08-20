@@ -51,25 +51,25 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kfV = [0.00005]   # full torque for 10 deg at 80mph means 0.00007818594
     else:
       #ret.lateralTuning.pid.kpBP = [0., 10., 30.]
-      #ret.lateralTuning.pid.kpV = [0.06, 0.07, 0.08]
+      #ret.lateralTuning.pid.kpV = [0.05, 0.06, 0.06]
       ret.lateralTuning.pid.kpBP = [0., 10., 20., 30., 35]
-      ret.lateralTuning.pid.kpV = [0.04, 0.06, 0.065, 0.07, 0.073] #Lower for less effective steering
+      ret.lateralTuning.pid.kpV = [0.05, 0.06, 0.06, 0.06, 0.065] #Lower for less effective steering
 
       #ret.lateralTuning.pid.kiBP = [0., 30.]
-      #ret.lateralTuning.pid.kiV = [0.03, 0.04]
+      #ret.lateralTuning.pid.kiV = [0.02, 0.03]
       ret.lateralTuning.pid.kiBP = [0., 30.]
-      ret.lateralTuning.pid.kiV = [0.03, 0.04] #Lower for less slop, higher for more slop.
+      ret.lateralTuning.pid.kiV = [0.02, 0.03] #Lower for less slop, higher for more slop.
 
       ret.lateralTuning.pid.kdBP = [0.]
       ret.lateralTuning.pid.kdV = [100.]
 
      # ret.lateralTuning.pid.kfBP = [0., 15., 30.]
-     # ret.lateralTuning.pid.kfV = [0.000015, 0.000025, 0.000030]   # full torque for 10 deg at 80mph means 0.00007818594
+     # ret.lateralTuning.pid.kfV = [0.000015, 0.000025, 0.000035]   # full torque for 10 deg at 80mph means 0.00007818594
       ret.lateralTuning.pid.kfBP = [0., 15., 30., 35]  #Steering torque
-      ret.lateralTuning.pid.kfV = [0.000009, 0.000020, 0.000028, 0.000032]   # full torque for 10 deg at 80mph means 0.00007818594
+      ret.lateralTuning.pid.kfV = [0.0000010, 0.000025, 0.000035, 0.000032]   # full torque for 10 deg at 80mph means 0.00007818594
 
-    ret.steerActuatorDelay = 0.01
-    ret.steerRateCost = 0.65
+    ret.steerActuatorDelay = 0.2
+    ret.steerRateCost = 0.5
     ret.steerLimitTimer = 0.7
 
     if candidate in (CAR.JEEP_CHEROKEE, CAR.JEEP_CHEROKEE_2019):
