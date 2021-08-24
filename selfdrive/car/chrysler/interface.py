@@ -58,7 +58,7 @@ class CarInterface(CarInterfaceBase):
       #ret.lateralTuning.pid.kiBP = [0., 30.]
       #ret.lateralTuning.pid.kiV = [0.02, 0.03]
       ret.lateralTuning.pid.kiBP = [0., 30.]
-      ret.lateralTuning.pid.kiV = [0.02, 0.03] #Lower for less slop, higher for more slop.
+      ret.lateralTuning.pid.kiV = [0.02, 0.02] #Lower for less slop, higher for more slop.
 
       ret.lateralTuning.pid.kdBP = [0.]
       ret.lateralTuning.pid.kdV = [1.0]
