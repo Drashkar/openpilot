@@ -27,7 +27,7 @@ class CarInterface(CarInterfaceBase):
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
     ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
-    ret.longitudinalTuning.kpV = [0.50, 0.45, .48, .54, .58] #Higher to keep speed more aggressive
+    ret.longitudinalTuning.kpV = [0.50, 0.45, .50, .54, .58] #Higher to keep speed more aggressive
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
     ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
     ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
@@ -53,7 +53,7 @@ class CarInterface(CarInterfaceBase):
       #ret.lateralTuning.pid.kpBP = [0., 10., 30.]
       #ret.lateralTuning.pid.kpV = [0.05, 0.06, 0.06]
       ret.lateralTuning.pid.kpBP = [0., 10., 20., 30., 35]
-      ret.lateralTuning.pid.kpV = [0.05, 0.06, 0.06, 0.06, 0.065] #Lower for less effective steering
+      ret.lateralTuning.pid.kpV = [0.05, 0.06, 0.07, 0.07, 0.08] #Lower for less effective steering
 
       #ret.lateralTuning.pid.kiBP = [0., 30.]
       #ret.lateralTuning.pid.kiV = [0.02, 0.03]
