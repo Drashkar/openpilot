@@ -145,7 +145,7 @@ static void ui_draw_vision_lane_lines(UIState *s) {
 
   // paint road edge
   for (int i = 0; i < std::size(scene.road_edge_vertices); i++) {
-    NVGcolor color = nvgRGBAf(1.0, 0.0, 1.0, std::clamp<float>(1.0 - scene.road_edge_stds[i], 0.0, 1.0));
+    NVGcolor color = nvgRGBAf(1.0, 0.0, 0.0, std::clamp<float>(1.0 - scene.road_edge_stds[i], 0.0, 1.0));
     ui_draw_line(s, scene.road_edge_vertices[i], &color, nullptr);
   }
   if (!scene.end_to_end) {
