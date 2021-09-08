@@ -307,7 +307,17 @@ struct CarControl {
     # range from -1.0 - 1.0
     steer @2: Float32;
     steeringAngleDeg @3: Float32;
+
     accel @4: Float32; # m/s^2
+    longControlState @5: LongControlState;
+
+    enum LongControlState @0xe40f3a917d908282{
+      off @0;
+      pid @1;
+      stopping @2;
+      starting @3;
+    }
+
   }
 
   struct CruiseControl {
@@ -329,9 +339,7 @@ struct CarControl {
     rightLaneDepart @8: Bool;
     leftLaneDepart @9: Bool;
     leadDistance @10: Float32;
-    longStopping @11: Bool;
-    longStarting @12: Bool;
-    leadvRel @13: Float32;
+    leadvRel @11: Float32;
 
     enum VisualAlert {
       # these are the choices from the Honda
@@ -377,7 +385,7 @@ struct CarParams {
   enableApgs @6 :Bool; # advanced parking guidance system
   enableBsm @56 :Bool; # blind spot monitoring
   hasStockCamera @57 :Bool; # factory LKAS/LDW camera is present
-  enablehybridEcu @58 :Bool; #hydrid ecu
+  enablehybridEcu @59 :Bool; #hydrid ecu
 
   minEnableSpeed @7 :Float32;
   minSteerSpeed @8 :Float32;
@@ -428,6 +436,7 @@ struct CarParams {
   startingAccelRate @53 :Float32; # m/s^2/s while trying to start
 
   steerActuatorDelay @36 :Float32; # Steering wheel actuator delay in seconds
+  longitudinalActuatorDelay @58 :Float32; # Gas/Brake actuator delay in seconds
   openpilotLongitudinalControl @37 :Bool; # is openpilot doing the longitudinal control?
   carVin @38 :Text; # VIN number queried during fingerprinting
   dashcamOnly @41: Bool;

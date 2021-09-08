@@ -23,9 +23,9 @@ class CarInterface(CarInterfaceBase):
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
     ret.longitudinalTuning.kpBP = [0., .3, 10., 35.]
-    ret.longitudinalTuning.kpV = [1.8, 1.2, .8, .6]
+    ret.longitudinalTuning.kpV = [0.6, 0.6, 0.6, 0.6]
     ret.longitudinalTuning.kiBP = [0., .3, 15., 35.]
-    ret.longitudinalTuning.kiV = [0.15, .10, .05, .045]
+    ret.longitudinalTuning.kiV = [0.006, .005, .005, .0045]
     ret.longitudinalTuning.deadzoneBP = [0., .5]
     ret.longitudinalTuning.deadzoneV = [0.00, 0.00]
     ret.longitudinalTuning.kfBP = [0., 5., 10., 20., 30.]
@@ -33,6 +33,7 @@ class CarInterface(CarInterfaceBase):
     ret.startAccel = 0.5
     ret.minSpeedCan = 0.3
     ret.stoppingControl = True
+    ret.stoppingDecelRate = 0.3
 
     if not Params().get_bool('ChryslerMangoLat'):
       ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[9., 20.], [9., 20.]]
@@ -120,7 +121,6 @@ class CarInterface(CarInterfaceBase):
     can_sends = self.CC.update(c.enabled, self.CS, c.actuators, c.cruiseControl.cancel,
                                c.hudControl.visualAlert,
                                c.hudControl.leadvRel,
-                               c.hudControl.leadVisible, c.hudControl.leadDistance, 
-                               c.hudControl.longStarting)
+                               c.hudControl.leadVisible, c.hudControl.leadDistance)
 
     return can_sends

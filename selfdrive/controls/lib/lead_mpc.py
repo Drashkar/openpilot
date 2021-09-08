@@ -10,8 +10,8 @@ from selfdrive.swaglog import cloudlog
 
 MPC_T = list(np.arange(0,1.,.2)) + list(np.arange(1.,10.6,.6))
 
-Bpx = [0.75, 1., 1.5]
-BpTR = [1.8, 1.5, 1.3]
+Bpx = [0.75, 1., 1.5, 2.]
+BpTR = [1.8, 1.5, 1.3, 0.9]
 
 BpV = [0., .278, 3., 8., 15., 30]
 BpXTR = [4., 4., 6., 16., 20., 25.]

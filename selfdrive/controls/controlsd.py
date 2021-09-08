@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import os
 import math
+from numbers import Number
+
 from cereal import car, log
 from common.numpy_fast import clip
 from common.realtime import sec_since_boot, config_realtime_process, Priority, Ratekeeper, DT_CTRL
@@ -46,7 +48,7 @@ Desire = log.LateralPlan.Desire
 LaneChangeState = log.LateralPlan.LaneChangeState
 LaneChangeDirection = log.LateralPlan.LaneChangeDirection
 EventName = car.CarEvent.EventName
-long_ctrl_state = log.ControlsState.LongControlState
+
 
 class Controls:
   def __init__(self, sm=None, pm=None, can_sock=None):
@@ -448,6 +450,7 @@ class Controls:
     long_plan = self.sm['longitudinalPlan']
 
     actuators = car.CarControl.Actuators.new_message()
+    actuators.longControlState = self.LoC.long_control_state
 
     if CS.leftBlinker or CS.rightBlinker:
       self.last_blinker_frame = self.sm.frame
@@ -463,7 +466,7 @@ class Controls:
     has_lead = self.sm['longitudinalPlan'].hasLead
     if not self.joystick_mode:
       # accel PID loop
-      pid_accel_limits = self.CI.get_pid_accel_limits(CS.vEgo, self.v_cruise_kph * CV.KPH_TO_MS)
+      pid_accel_limits = self.CI.get_pid_accel_limits(self.CP, CS.vEgo, self.v_cruise_kph * CV.KPH_TO_MS)
       actuators.accel, self.v_target, self.a_target = self.LoC.update(self.active, CS, self.CP, long_plan, pid_accel_limits, d_rel, v_rel, has_lead)
 
       # Steering PID loop and lateral MPC
@@ -510,7 +513,11 @@ class Controls:
 
     # Ensure no NaNs/Infs
     for p in ACTUATOR_FIELDS:
-      if not math.isfinite(getattr(actuators, p)):
+      attr = getattr(actuators, p)
+      if not isinstance(attr, Number):
+        continue
+
+      if not math.isfinite(attr):
         cloudlog.error(f"actuators.{p} not finite {actuators.to_dict()}")
         setattr(actuators, p, 0.0)
 
@@ -543,13 +550,6 @@ class Controls:
     CC.hudControl.leadvRel = self.sm['radarState'].leadOne.vRel
     CC.hudControl.leadVisible = self.sm['longitudinalPlan'].hasLead
     CC.hudControl.leadDistance = self.sm['radarState'].leadOne.dRel
-    # controlsState
-    dat = messaging.new_message('controlsState')
-    dat.valid = CS.canValid
-    controlsState = dat.controlsState
-    controlsState.longControlState = self.LoC.long_control_state
-    CC.hudControl.longStopping = controlsState.longControlState == long_ctrl_state.stopping
-    CC.hudControl.longStarting = controlsState.longControlState == long_ctrl_state.starting
 
     right_lane_visible = self.sm['lateralPlan'].rProb > 0.5
     left_lane_visible = self.sm['lateralPlan'].lProb > 0.5
@@ -592,6 +592,10 @@ class Controls:
     steer_angle_without_offset = math.radians(CS.steeringAngleDeg - params.angleOffsetAverageDeg)
     curvature = -self.VM.calc_curvature(steer_angle_without_offset, CS.vEgo)
 
+    # controlsState
+    dat = messaging.new_message('controlsState')
+    dat.valid = CS.canValid
+    controlsState = dat.controlsState
     controlsState.alertText1 = self.AM.alert_text_1
     controlsState.alertText2 = self.AM.alert_text_2
     controlsState.alertSize = self.AM.alert_size
@@ -607,6 +611,7 @@ class Controls:
     controlsState.curvature = curvature
     controlsState.state = self.state
     controlsState.engageable = not self.events.any(ET.NO_ENTRY)
+    controlsState.longControlState = self.LoC.long_control_state
     controlsState.vPid = float(self.LoC.v_pid)
     controlsState.vCruise = float(self.v_cruise_kph)
     controlsState.upAccelCmd = float(self.LoC.pid.p)
