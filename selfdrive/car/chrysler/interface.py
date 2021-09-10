@@ -27,7 +27,7 @@ class CarInterface(CarInterfaceBase):
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
     ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
-    ret.longitudinalTuning.kpV = [0.50, 0.45, .50, .54, .58] #Higher to keep speed more aggressive
+    ret.longitudinalTuning.kpV = [0.50, 0.45, .45, .50, .50] #Higher to keep speed more aggressive
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
     ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
     ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
@@ -40,7 +40,7 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.kfV = [1., 1., 1., 1., .95]
     ret.startAccel = 0.5
     ret.minSpeedCan = 0.3
-    ret.stoppingBrakeRate = 0.3 # 0.2brake_travel/s while trying to stop
+    ret.stoppingBrakeRate = 0.4 # 0.2brake_travel/s while trying to stop
     ret.startingBrakeRate = 2.0 # brake_travel/s while releasing on restart
     ret.stoppingControl = True
 
@@ -53,7 +53,7 @@ class CarInterface(CarInterfaceBase):
       #ret.lateralTuning.pid.kpBP = [0., 10., 30.]
       #ret.lateralTuning.pid.kpV = [0.05, 0.06, 0.06]
       ret.lateralTuning.pid.kpBP = [0., 10., 20., 30., 35]
-      ret.lateralTuning.pid.kpV = [0.04, 0.05, 0.06, 0.07, 0.08] #Lower for less effective steering
+      ret.lateralTuning.pid.kpV = [0.03, 0.04, 0.06, 0.07, 0.08] #Lower for less effective steering
 
       #ret.lateralTuning.pid.kiBP = [0., 30.]
       #ret.lateralTuning.pid.kiV = [0.02, 0.03]
@@ -66,7 +66,7 @@ class CarInterface(CarInterfaceBase):
      # ret.lateralTuning.pid.kfBP = [0., 15., 30.]
      # ret.lateralTuning.pid.kfV = [0.000015, 0.000025, 0.000035]   # full torque for 10 deg at 80mph means 0.00007818594
       ret.lateralTuning.pid.kfBP = [0., 10., 20., 30., 35]  #Steering torque
-      ret.lateralTuning.pid.kfV = [0.0000010, 0.0000019, 0.000028, 0.000035, 0.000035]   # full torque for 10 deg at 80mph means 0.00007818594
+      ret.lateralTuning.pid.kfV = [0.0000010, 0.0000019, 0.000030, 0.000035, 0.000035]   # full torque for 10 deg at 80mph means 0.00007818594
 
     ret.steerActuatorDelay = 0.4 #0.2
     ret.steerRateCost = 0.5
