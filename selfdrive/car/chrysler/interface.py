@@ -7,10 +7,6 @@ from common.params import Params
 
 class CarInterface(CarInterfaceBase):
   @staticmethod
-  def compute_gb(accel, speed):
-    return float(accel)
-
-  @staticmethod
   def get_params(candidate, fingerprint=gen_empty_fingerprint(), car_fw=None):
     ret = CarInterfaceBase.get_std_params(candidate, fingerprint)
     ret.carName = "chrysler"
@@ -27,22 +23,21 @@ class CarInterface(CarInterfaceBase):
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
     ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
-    ret.longitudinalTuning.kpV = [0.50, 0.45, .45, .50, .50] #Higher to keep speed more aggressive
+    ret.longitudinalTuning.kpV = [0.6, 0.6, 0.6, 0.6, 0.6]
+    #ret.longitudinalTuning.kpV = [0.50, 0.45, .45, .50, .50] #Higher to keep speed more aggressive
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
-    ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
-    ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
-    ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.3, 0.3] #Deadzone to ignore error
-    ret.gasMaxBP = [0., 1., 1.1, 15., 40.]
-    ret.gasMaxV = [2., 2., 2., 2., 2.] #Maximum acceleration
-    ret.brakeMaxBP = [0., 5., 5.1]
-    ret.brakeMaxV = [3.8, 3.8, 3.8]  # safety limits to stop unintended deceleration
+    ret.longitudinalTuning.kiV = [0.006, .005, .005, .005, .0045]
+    #ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
+    ret.longitudinalTuning.deadzoneBP = [0., .5]
+    ret.longitudinalTuning.deadzoneV = [0.00, 0.00]
+    #ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
+    #ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.3, 0.3] #Deadzone to ignore error
     ret.longitudinalTuning.kfBP = [0., 5., 10., 20., 30.]
     ret.longitudinalTuning.kfV = [1., 1., 1., 1., .95]
     ret.startAccel = 0.5
     ret.minSpeedCan = 0.3
-    ret.stoppingBrakeRate = 0.4 # 0.2brake_travel/s while trying to stop
-    ret.startingBrakeRate = 2.0 # brake_travel/s while releasing on restart
     ret.stoppingControl = True
+    ret.stoppingDecelRate = 0.3
 
     if not Params().get_bool('ChryslerMangoLat'):
       ret.lateralTuning.pid.kpBP, ret.lateralTuning.pid.kiBP = [[9., 20.], [9., 20.]]
@@ -68,9 +63,9 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kfBP = [0., 10., 20., 30., 35]  #Steering torque
       ret.lateralTuning.pid.kfV = [0.0000010, 0.0000019, 0.000030, 0.000035, 0.000035]   # full torque for 10 deg at 80mph means 0.00007818594
 
-    ret.steerActuatorDelay = 0.4 #0.2
-    ret.steerRateCost = 0.5
-    ret.steerLimitTimer = 0.7
+    ret.steerActuatorDelay = 0.1 #0.4
+    ret.steerRateCost = 0.7
+    ret.steerLimitTimer = 0.4
 
     if candidate in (CAR.JEEP_CHEROKEE, CAR.JEEP_CHEROKEE_2019):
       ret.wheelbase = 2.91  # in meters
@@ -136,7 +131,6 @@ class CarInterface(CarInterfaceBase):
     can_sends = self.CC.update(c.enabled, self.CS, c.actuators, c.cruiseControl.cancel,
                                c.hudControl.visualAlert,
                                c.hudControl.leadvRel,
-                               c.hudControl.leadVisible, c.hudControl.leadDistance, 
-                               c.hudControl.longStarting)
+                               c.hudControl.leadVisible, c.hudControl.leadDistance)
 
     return can_sends

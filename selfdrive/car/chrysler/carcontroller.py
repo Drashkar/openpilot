@@ -1,5 +1,5 @@
 from numpy import interp
-
+from cereal import car
 from common.op_params import opParams
 from selfdrive.car import apply_toyota_steer_torque_limits
 from selfdrive.car.chrysler.chryslercan import create_lkas_hud, create_lkas_command, \
@@ -13,6 +13,8 @@ from common.numpy_fast import clip
 from selfdrive.car.chrysler.chryslerlonghelper import cluster_chime, accel_hysteresis, accel_rate_limit, \
   cruiseiconlogic, setspeedlogic, SET_SPEED_MIN, DEFAULT_DECEL, STOP_GAS_THRESHOLD, START_BRAKE_THRESHOLD, \
   STOP_BRAKE_THRESHOLD, START_GAS_THRESHOLD, CHIME_GAP_TIME, ACCEL_SCALE, ACCEL_MIN, ACCEL_MAX
+
+LongCtrlState = car.CarControl.Actuators.LongControlState
 
 class CarController():
   def __init__(self, dbc_name, CP, VM):
@@ -65,7 +67,7 @@ class CarController():
 
     self.packer = CANPacker(dbc_name)
 
-  def update(self, enabled, CS, actuators, pcm_cancel_cmd, hud_alert, op_lead_rvel, op_lead_visible, op_lead_dist, long_starting):
+  def update(self, enabled, CS, actuators, pcm_cancel_cmd, hud_alert, op_lead_rvel, op_lead_visible, op_lead_dist):
 
     # *** compute control surfaces ***
 
@@ -219,7 +221,11 @@ class CarController():
     self.decel_val = DEFAULT_DECEL
     self.trq_val = CS.axle_torq_min
 
-    apply_accel = (actuators.gas - actuators.brake) if enabled else 0.
+    long_stopping = actuators.longControlState == LongCtrlState.stopping
+    long_starting = actuators.longControlState == LongCtrlState.starting
+
+
+    apply_accel = actuators.accel if enabled else 0.
 
     accmaxBp = [20, 30, 50]
     if Params().get_bool('ChryslerMadGas'):
