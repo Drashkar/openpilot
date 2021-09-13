@@ -23,15 +23,15 @@ class CarInterface(CarInterfaceBase):
 
     # Long tuning Params -  make individual params for cars, baseline Pacifica Hybrid
     ret.longitudinalTuning.kpBP = [0., .3, 10., 20., 35.]
-    ret.longitudinalTuning.kpV = [0.6, 0.6, 0.6, 0.6, 0.6]
-    #ret.longitudinalTuning.kpV = [0.50, 0.45, .45, .50, .50] #Higher to keep speed more aggressive
+    #ret.longitudinalTuning.kpV = [0.6, 0.6, 0.6, 0.6, 0.6]
+    ret.longitudinalTuning.kpV = [0.50, 0.45, .45, .50, .50] #Higher to keep speed more aggressive
     ret.longitudinalTuning.kiBP = [0., .3, 15., 20., 35.]
     ret.longitudinalTuning.kiV = [0.006, .005, .005, .005, .0045]
     #ret.longitudinalTuning.kiV = [0.006, .0040, .0040, .0040, .0040] #error correction, lower if goes over target
-    ret.longitudinalTuning.deadzoneBP = [0., .5]
-    ret.longitudinalTuning.deadzoneV = [0.00, 0.00]
-    #ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
-    #ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.3, 0.3] #Deadzone to ignore error
+    #ret.longitudinalTuning.deadzoneBP = [0., .5]
+    #ret.longitudinalTuning.deadzoneV = [0.00, 0.00]
+    ret.longitudinalTuning.deadzoneBP = [0., .5, 10., 35.]
+    ret.longitudinalTuning.deadzoneV = [0.00, 0.00, 0.3, 0.3] #Deadzone to ignore error
     ret.longitudinalTuning.kfBP = [0., 5., 10., 20., 30.]
     ret.longitudinalTuning.kfV = [1., 1., 1., 1., .95]
     ret.startAccel = 0.5
