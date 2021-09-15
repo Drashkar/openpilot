@@ -11,7 +11,7 @@ LONG_PRESS_STEP = 1
 ACCEL_HYST_GAP = 0.0  # don't change accel command for small oscillations within this value
 ACCEL_MAX = 2.  # m/s2
 ACCEL_MIN = -3.8  # m/s2
-ACCEL_SCALE = 1.
+ACCEL_SCALE = 0.6 #1.0
 
 DEFAULT_DECEL = 4.0 # m/s2
 START_BRAKE_THRESHOLD = -0.00001 # m/s2
