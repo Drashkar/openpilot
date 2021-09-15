@@ -11,7 +11,7 @@ LONG_PRESS_STEP = 1
 ACCEL_HYST_GAP = 0.0  # don't change accel command for small oscillations within this value
 ACCEL_MAX = 2.  # m/s2
 ACCEL_MIN = -3.8  # m/s2
-ACCEL_SCALE = 0.6 #1.0
+ACCEL_SCALE = 1.0 #1.0
 
 DEFAULT_DECEL = 4.0 # m/s2
 START_BRAKE_THRESHOLD = -0.00001 # m/s2
@@ -120,8 +120,8 @@ def accel_rate_limit(accel_lim, prev_accel_lim, stopped):
   dra = [ 0.005, 0.007,  0.008, 0.01,  0.04]
 
   decel_rate = interp(accel_lim, drBp, dra)
-  accel_rate = 0.005
-
+  accel_rate = 0.003
+  #accel_rate = 0.005
   if not stopped:
     if accel_lim > 0:
       if accel_lim > prev_accel_lim:
