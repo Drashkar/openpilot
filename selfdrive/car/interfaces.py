@@ -90,8 +90,6 @@ class CarInterfaceBase():
     ret.longitudinalTuning.kfV = [1.]
 
     ret.lateralTuning.pid.kdBP = [0.]
-    ret.lateralTuning.pid.kdV = [0.1]
-    ret.lateralTuning.pid.kdBP = [0.]
     ret.lateralTuning.pid.kdV = [0.00002]
     ret.longitudinalActuatorDelayLowerBound = 0.15
     ret.longitudinalActuatorDelayUpperBound = 0.15

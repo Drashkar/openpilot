@@ -130,7 +130,7 @@ class CarController():
     self.resume_press = False
     if CS.acc_hold and CS.out.standstill:
       self.acc_stop_timer += 1
-      if self.acc_stop_timer > 180: # send resume spam at 1.8 sec; looks like ACC auto resumes by itself if lead moves within 2 seconds
+      if self.acc_stop_timer > 100: # send resume spam at 1.8 sec; looks like ACC auto resumes by itself if lead moves within 2 seconds
         self.resume_press = True
     else:
       self.acc_stop_timer = 0
@@ -145,14 +145,14 @@ class CarController():
 
     self.op_cancel_cmd = False
 
-    if wheel_button_counter_change and self.ccframe >= self.stop_button_spam:
+    if (self.ccframe % 8 < 4) and self.ccframe >= self.stop_button_spam:  #and wheel_button_counter_change
       button_type = None
       if not enabled and pcm_cancel_cmd and CS.out.cruiseState.enabled and not self.op_long_enable:
         button_type = 'ACC_CANCEL'
         self.op_cancel_cmd = True
       elif enabled and self.resume_press and not self.op_long_enable and ((CS.lead_dist > self.lead_dist_at_stop) or (op_lead_rvel > 0) or (15 > CS.lead_dist >= 6.)):
         button_type = 'ACC_RESUME'
-      elif self.go_req:
+      elif (enabled and CS.out.standstill):
         button_type = 'ACC_RESUME'
 
       if button_type is not None:
